@@ -9,6 +9,7 @@ from views.finddistanceview import build_find_restaurants_distance_page  # Impor
 from views.contactinfoview import build_about_page  # Import function to build the contact/info page view
 from views.updatepasswordview import build_change_password_page  # Import function to build the change password page view
 from views.scatterplotview import build_scatter_plot_page  # Import function to build the scatter plot page view
+from views.roadmapfunctionality import build_road_conditions_page
 
 from usecases.saveuserusecase import save_user_info  # Import use case to save user information during sign-up
 from usecases.privacypolicyusecase import build_privacy_policy  # Import use case to build the privacy policy page
@@ -38,6 +39,15 @@ def home(request: Request):
     """
     session_user = request.cookies.get("session_user")  # Retrieve the session user from cookies
     return build_healthyroad_page() # Build and return the home page with the navbar
+
+@app.get("/track-road-conditions")
+def track_road_conditions_page(request: Request):
+    """
+    Serves the 'Track Road Conditions' page:
+    - Displays a list of unique roads.
+    - Provides an input to search for a road by road_id.
+    """
+    return build_road_conditions_page()
 
 @app.get("/find-distance-page")
 def find_distance_page(request: Request):
