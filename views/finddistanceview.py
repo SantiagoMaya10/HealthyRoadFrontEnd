@@ -1,6 +1,6 @@
 from fasthtml.common import *  # Import FastHTML components for building HTML elements
-from views.styles.homepagestyle import home_page_styles  # Import CSS for home page styling
-from views.styles.footerstyle import site_footer  # Import CSS for footer styling
+from views.styles.homepagestyle import divs_style  # Import CSS for home page styling
+from views.styles.footerstyle import footer_style  # Import CSS for footer styling
 from views.styles.finddistancestyle import find_distance_style  # Import CSS for the find distance page
 from usecases.findallrestaurantsusecase import find_all_restaurants  # Import the use case to retrieve restaurants data
 
@@ -27,7 +27,7 @@ def build_find_restaurants_distance_page():
             Meta(charset='UTF-8'),  # Meta tag for character encoding
             Meta(name='viewport', content='width=device-width, initial-scale=1.0'),  # Ensure the page is responsive
             Title('Explore Restaurants'),  # Page title
-            Style(home_page_styles(), site_footer(), find_distance_style()),  # Add the necessary stylesheets
+            Style(divs_style(), footer_style(), find_distance_style()),  # Add the necessary stylesheets
             Script(src="https://unpkg.com/htmx.org")  # Add the htmx script for AJAX functionality
         ),
         Body(

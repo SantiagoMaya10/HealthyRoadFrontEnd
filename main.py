@@ -2,7 +2,7 @@ from fasthtml.common import FastHTML, serve, Form  # Import FastHTML components 
 from fastapi import Request, Form  # Import FastAPI's Request and Form for handling HTTP requests and form data
 from fastapi.responses import HTMLResponse, RedirectResponse  # Import response types for returning HTML content and handling redirects
 
-from views.homepageview import build_home_page  # Import function to build the home page view
+from views.homepageview import build_healthyroad_page  # Import function to build the home page view
 from views.signupview import build_sign_up_page  # Import function to build the sign-up page view
 from views.signinview import build_sign_in_page  # Import function to build the sign-in page view
 from views.finddistanceview import build_find_restaurants_distance_page  # Import function to build the restaurant distance page view
@@ -37,7 +37,7 @@ def home(request: Request):
         Html: The rendered home page HTML.
     """
     session_user = request.cookies.get("session_user")  # Retrieve the session user from cookies
-    return build_home_page(build_navbar(session_user))  # Build and return the home page with the navbar
+    return build_healthyroad_page() # Build and return the home page with the navbar
 
 @app.get("/find-distance-page")
 def find_distance_page(request: Request):
