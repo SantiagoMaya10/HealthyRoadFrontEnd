@@ -2,33 +2,42 @@ import folium # library to create interactive maps
 # Class to retrieve db connections
 from databaseconfig.dbconfig import MySqLConnectionCreator
 
-def create_map():
-    """Fetches all restaurants from database
-    and then creates an interactive map with folium
-    locating each restaurant in the map and its address
-
-    Returns:
-        str : An str which is an HTML document 
-        with the map
+def create_road_map(road_id):
     """
-    # Fetch restaurants from the database
+    Generates a Folium map with the lat/lon markers for a specific road_id.
+    """
+    road = get_road_locations(road_id)
+    
+    if not road:
+        return "<h3>No locations found for this road ID</h3>"
+
+    # Center the map on the first location
+    m = folium.Map(location=[road[0][0], road[0][1]], zoom_start=20)
+
+    # Add markers for each location
+    for lat, lon, classif, name in road:
+        folium.Marker([lat, lon], popup=f"Road Id: {road_id} Road name: {name} Location: {lat}, {lon}, Damage(s): {classif}").add_to(m)
+
+    return m._repr_html_()  # Return HTML for the map
+
+
+def get_road_locations(road_id):
+    """
+    Fetches the lat/lon for a given road_id from the database.
+    """
     connector = MySqLConnectionCreator()
     conn = connector.db_conn
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT name, location_lat, location_lon, address FROM restaurant")
-    restaurants = cursor.fetchall()
+    cursor = conn.cursor()
+    
+    query = """
+        SELECT location_lat, location_lon, classifications, road_name 
+        FROM road_classification 
+        WHERE road_id = %s
+    """
+    cursor.execute(query, (road_id,))
+    locations = cursor.fetchall()  # Get all locations (lat/lon) for this road
+    
     cursor.close()
     connector.close_db_connection(conn)
-    # Create a Folium map centered in Medellín
-    medellin_map = folium.Map(location=[6.2442, -75.5812], zoom_start=12)
-
-    # Add restaurant markers to the map
-    for restaurant in restaurants:
-        folium.Marker(
-            location=[restaurant['location_lat'], restaurant['location_lon']],
-            popup=f"{restaurant['name']}<br>{restaurant['address']}",
-            icon=folium.Icon(color="blue", icon="cutlery", prefix="fa")
-        ).add_to(medellin_map)
-
-    # Save map to HTML
-    return medellin_map._repr_html_()  # This returns the map as an HTML string
+    
+    return locations

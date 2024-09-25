@@ -16,7 +16,7 @@ from usecases.privacypolicyusecase import build_privacy_policy  # Import use cas
 from usecases.signinusecase import sign_in_user  # Import use case to handle user sign-in logic
 from usecases.navbarusecase import build_navbar  # Import use case to build the navigation bar based on user session
 from usecases.finddistanceusecase import find_distance_use_case  # Import use case to calculate distance between two restaurants
-from usecases.createmapusecase import create_map  # Import use case to create an interactive map of restaurants
+from usecases.createmapusecase import create_road_map  # Import use case to create an interactive map of restaurants
 from usecases.updatepasswordusecase import update_password_usecase  # Import use case to handle password updates
 
 from databaseconfig.dbconfig import MySqLConnectionCreator  # Import MySQL connection creator for database interactions
@@ -48,6 +48,14 @@ def track_road_conditions_page(request: Request):
     - Provides an input to search for a road by road_id.
     """
     return build_road_conditions_page()
+
+@app.post("/view-road-map")
+async def view_road_map(request: Request, road_id: int = Form(...)):
+    """
+    Receives the road_id from the form and displays the map with locations.
+    """
+    road_map_html = create_road_map(road_id)  # Generate the map
+    return HTMLResponse(content=road_map_html)  # Ret
 
 @app.get("/find-distance-page")
 def find_distance_page(request: Request):
