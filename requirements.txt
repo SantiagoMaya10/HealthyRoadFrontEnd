@@ -1,0 +1,7 @@
+python-fasthtml
+mysql-connector-python
+fastapi
+numpy
+scipy
+folium
+matplotlib
