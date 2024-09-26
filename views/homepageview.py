@@ -31,7 +31,12 @@ def build_healthyroad_page():
     ),
     Body(
         navbar,  # Add the navbar
-        Div(  # Main content div
+            Div(  # Main content div
+                Div(
+                H3('Note: Remember the menaning of the classification types'),
+                P('D00 (Longitudinal Crack), D10 (Transverse Crack), D20 (Alligator Crack), D40 (Potholes)'),
+                cls='classification-note'  # CSS class for styling
+            ),
             Div(  # First functionality div
                 H3('Track Road Conditions'),
                 P('Monitor road conditions in real time and classify them based on quality.'),

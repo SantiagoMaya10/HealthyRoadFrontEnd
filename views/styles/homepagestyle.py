@@ -1,18 +1,37 @@
 divs_css = """
 .main-content {
     display: flex;
-    justify-content: space-around;
-    margin: 100px 0;
-    padding: 0 100px;
+    flex-direction: column;  /* Stack elements vertically */
+    align-items: center;     /* Center align elements */
+    margin: 50px 0;
+    padding: 0 20px;
+}
+
+.classification-note {
+    background-color: #e0e0e0;  /* Light gray background */
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    text-align: center;
+    width: 80%;
+}
+
+.classification-note h3 {
+    margin-top: 0;
+}
+
+.classification-note p {
+    margin-bottom: 0;
+    color: #333;
 }
 
 .functionality {
     background-color: #c8c6c6;
-    padding: 200px;
-    margin: 10px;
+    padding: 50px;
+    margin: 20px 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 40%;
+    width: 80%;  /* Adjusted width to match the note */
     text-align: center;
 }
 
