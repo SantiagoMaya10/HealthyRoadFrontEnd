@@ -5,7 +5,7 @@ from views.styles.navbarstyle import navbar_style
 from views.styles.footerstyle import footer_style
 
 
-def build_road_conditions_page():
+def build_road_conditions_page(redirect_to):
     """
     Builds the 'Track Road Conditions' page, displaying a table of roads and a form to input a road_id.
     """
@@ -68,7 +68,7 @@ def build_road_conditions_page():
                         Input(type='number', name='road_id', required=True),
                         Br(),
                         Input(type='submit', value='View Map'),
-                        action='/view-road-map',
+                        action= redirect_to,
                         method='POST'
                     ),
                     cls='road-input-section'
