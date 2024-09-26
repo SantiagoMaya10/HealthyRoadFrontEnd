@@ -29,7 +29,7 @@ def build_road_conditions_page(redirect_to):
         Head(
             Meta(charset='UTF-8'),
             Meta(name='viewport', content='width=device-width, initial-scale=1.0'),
-            Title('Track Road Conditions'),
+            Title('Select Road'),
             Style(
                 road_conditions_style(),
                 navbar_style(),
@@ -39,7 +39,7 @@ def build_road_conditions_page(redirect_to):
         Body(
             navbar,
             Div(
-                H2('Track Road Conditions'),
+                H2('Available Roads to explore'),
                 
                 # Table displaying the roads
                 Table(
@@ -64,7 +64,7 @@ def build_road_conditions_page(redirect_to):
                 # Form for inputting road ID
                 Div(
                     Form(
-                        Label('Enter Road ID to View on Map:'),
+                        Label('Enter Road ID to acces functionality:'),
                         Input(type='number', name='road_id', required=True),
                         Br(),
                         Input(type='submit', value='View Map'),
