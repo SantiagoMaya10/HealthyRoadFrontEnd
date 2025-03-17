@@ -1,5 +1,5 @@
 # HealthyRoadFrontEnd
-This app holds the frontend for HealthyRoad app
+This app holds the frontend for HealthyRoad app.
 
 Para ejecutar el código en local deb hacerlo con el siguiente comando:
 
